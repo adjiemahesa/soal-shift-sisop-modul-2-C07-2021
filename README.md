@@ -23,8 +23,7 @@ firstchild = fork();
 	   execv("/bin/mkdir",arg);
     }
 ```
-bagian diatas adalah Melakukan fork pada parent process, kemudian dalam child process, membuat array "folder" yang berisi  argumen - argumen untuk digunakan dalam membuat folder yaitu mkdir untuk membuat folder, dan nama - nama folder yang sudah di masukkan kedalam array "nmfolder" yang sudah dideclare di atas.  melakukan fungsi execv dengan argumen pertama ``/bin/mkdir`` dan argumen kedua array argumen folder dan melakukan wait pada parent process.
-
+bagian diatas adalah Melakukan fork pada parent process, kemudian dalam child process, membuat array "folder" yang berisi  argumen - argumen untuk digunakan dalam membuat folder yaitu mkdir untuk membuat folder, dan nama - nama folder yang sudah di masukkan kedalam array "nmfolder" yang sudah dideclare di atas.
 
 __1B__
 
