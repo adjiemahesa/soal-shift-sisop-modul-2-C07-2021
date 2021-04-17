@@ -103,6 +103,7 @@ __1F__
 # Soal 2
 
 __2A__
+Pada soal ini kita diminta pertama-tama untuk mengextract file ``pets.zip`` yang kita masukkan kedalam folder `modul 2` dan `petshop`
 
 __2B__
 
