@@ -39,10 +39,7 @@ int main(){
           		
           		while((fileDir = readdir(dirType)) != NULL)
           		{
-            			printf("Folder Terbuat\n");
-            			//if ( !strcmp( fileDir-> d_name, "."  )) continue;
-            			//if ( !strcmp( fileDir-> d_name, ".." )) continue;
-				    
+            			printf("Folder Terbuat\n");    
 				    strcpy(animalName_folder, "modul2/petshop/");
 				    strcat(animalName_folder, strtok(fileDir -> d_name, ";"));
 				    
