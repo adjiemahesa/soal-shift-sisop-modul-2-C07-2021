@@ -24,8 +24,7 @@ int main()
     }
 
     if (first == 0)
-    {
-	   //Buat Folder
+    {	//1A(folder)   
 	   char *arg[] = {"mkdir",nmfolder[0],nmfolder[1],nmfolder[2],NULL};
 	   execv("/bin/mkdir",arg);
     }
