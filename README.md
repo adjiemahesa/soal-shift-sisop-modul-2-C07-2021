@@ -4,6 +4,7 @@
 # soal nomor 1 
 
 __1A__
+
 di soal ini kami diminta untuk membuat tiga folder yang akan diberi nama dengan "Musyik","Pyoto", dan "Fylm"
 ```
 char *nmfolder[]={"Musyik","Pyoto","Fylm"};
@@ -27,6 +28,7 @@ bagian diatas adalah Melakukan fork pada parent process, kemudian dalam child pr
 
 
 __1B__
+
 dalam soal ini kami diminta untuk men-download file berupa music,foto, dan film dari link yang sudah diberikan
 
 ```
