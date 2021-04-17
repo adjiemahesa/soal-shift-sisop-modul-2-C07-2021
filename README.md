@@ -115,18 +115,42 @@ if (fork()==0){
 	execv("/bin/unzip", argv);
 }
 ```
-Kita menggunakan `fork` dan `wait` untuk melakukan pengerjaan `exec` agar bisa berjalan bersamaan dan tereksekusi semua secara bergantian. Untuk menggunakan fungsi wait kita gunakan `while ((wait(&status)) > 0)` dimana jika nilai dari **int** `status` bernilai benar maka akan jalan. 
+Kita menggunakan `fork` dan `wait` untuk melakukan pengerjaan `exec` agar bisa berjalan dan tereksekusi semua secara tidak berbentrokan. Untuk menggunakan fungsi wait kita gunakan `while ((wait(&status)) > 0)` dimana jika nilai dari **int** `status` bernilai benar maka akan jalan. 
 
 __2B__
 
-Pada soal ini saya gunakan directory
+Pada soal ini kami dimintakan untuk membuat folder untuk tiap jenis hewan yang terdapat di dalam foto-foto yang di extract. Pada soal ini kami menyelesaikan dengan menggunakan directory dimana fungsi `DIR` akan mengakses dan melakukan pemeriksaan ada apa saja di dalam directory yang diakses. Setelah itu, kami masukkan kedalam looping dimana kita menggunakan pointer `directoryType` untuk melakukan pemeriksaan tersebut dan diarahkan ke folder yang ingin dituju. 
+```
+if (fork()==0){
+			DIR *directoryType;
+          		struct dirent *fileDir;
+          		directoryType = opendir("modul2/petshop");
+			while((fileDir = readdir(directoryType)) != NULL){
+```
+Lalu, untuk mengambil nama dari tiap foto untuk kita buatkan folder kita menggunakan fungsi `string` dengan `strcpy` dan `strcat` dimana akan mengabil dari folder `modul2/petshop` dan string hingga symbol `;` dengan menggunakan `strtok`
+```
+printf("Folder Terbuat\n");    
+				    strcpy(animalName_folder, "modul2/petshop/");
+				    strcat(animalName_folder, strtok(fileDir -> d_name, ";"));
+```
+Setelah itu, untuk membuat foldernya kita menggunakan `childid2` yang kita gunakan sebagai `fork` dari pengeksekusian program dan menggunakan `execv` dengan argumen ` char *argv[] = {"mkdir", "-p", animalName_folder, NULL};` agar terbuat folder beserta nama yang dingingkan.
+```
+childid2 = fork();
+				    if(childid2 == 0)
+				    {
+				      char *argv[] = {"mkdir", "-p", animalName_folder, NULL};
+				      execv("/bin/mkdir", argv);
+				    }
+```
 
 __2C__
 
-Saya masih bermasalah dalam memindahkan file dan rename secara bersamaan
+Masih bermasalah dalam memindahkan file dan rename secara bersamaan
 
 __2D__
 
-Saya masih bermasalah dalam melakukan pemisahan nama dikarenakan pada 2C saya bisa rename tapi file akan berubah.
+Masih bermasalah dalam melakukan pemisahan nama dikarenakan pada 2C file bisa rename tapi file original akan berubah.
 
 __2E__
+
+Masih bermasalah karena prgram tidak bisa membuat file textnya sesuai output yang diinginkan
