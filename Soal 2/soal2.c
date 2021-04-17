@@ -8,12 +8,11 @@
 
 int main(){
 
-	pid_t childid, childid2, childid3, childid4;
+	pid_t childid, childid2;
 	char animalName_folder[100];
 	int status;
 	
 	childid = fork();
-	childid2 = fork();
 	
 	if (childid < 0 ){
     		exit(EXIT_FAILURE);
@@ -33,11 +32,11 @@ int main(){
 		sleep (1);
 		
 		if (fork()==0){
-			DIR *dirType;
+			DIR *directoryType;
           		struct dirent *fileDir;
-          		dirType = opendir("modul2/petshop");
+          		directoryType = opendir("modul2/petshop");
           		
-          		while((fileDir = readdir(dirType)) != NULL)
+          		while((fileDir = readdir(directoryType)) != NULL)
           		{
             			printf("Folder Terbuat\n");    
 				    strcpy(animalName_folder, "modul2/petshop/");
