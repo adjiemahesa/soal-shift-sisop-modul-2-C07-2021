@@ -37,7 +37,9 @@ char *linkdonlot[] = {"https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC
     int film = 2;
 ```
 bagian diatas adalah men-declare array"linkdonlot" dan memasukkan argumen-argumen berupa link dari file-file yang diminta untuk didownload dan juga mendeclare index-index sesuai urutan link dalam array dan namanya untuk array "linkdonlot" yang akan dimasukkan kedalam array argv yang nanti dibuat saat dalam proses 
+
 ___untuk file foto___
+
 ```
 third = fork();
 	    if(third <= -1) {
