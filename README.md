@@ -87,7 +87,7 @@ third = fork();
 	 else {
 	 while((wait(&status)) > 0);}
  ```
- pada setiap file yang didownloan, melakukan fork pada parent process, membuat array argv yang didalamya berisikan ``"wget","--no-check-certificate",linkdonlot[film],"-O","Film_for_Stevany.zip",NULL`` index menyesuaikan index dalam array "linkdonlot" sesuai file yang di-download, kemudian memanggil fungsi evecv dengan argumen ``"/usr/bin/wget",argv`` lalu melakukan wait pada proses tersebut.
+ pada setiap file yang didownloan, melakukan fork pada parent process, membuat array argv yang didalamya berisikan ``"wget","--no-check-certificate",linkdonlot[film],"-O","Film_for_Stevany.zip",NULL`` index dalam array "linkdonlot" disesuaikan dengan file yang di-download, kemudian memanggil fungsi evecv dengan argumen ``"/usr/bin/wget",argv`` lalu melakukan wait pada proses tersebut.
 
 __1C__
 __1D__
