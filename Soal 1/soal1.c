@@ -79,6 +79,9 @@ int main()
          char *argv[] = {"wget","--no-check-certificate",linkdonlot[film],"-O","Film_for_Stevany.zip",NULL};
          execv("/usr/bin/wget",argv);
          }
+	 else {
+	 while((wait(&status)) > 0);
+	 }
                 
             }
         }
