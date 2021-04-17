@@ -8,8 +8,8 @@
 
 int main(){
 
-	pid_t childid, childid2;
-	char foldername[100], temp[100], filename[100];
+	pid_t childid, childid2, childid3, childid4;
+	char animalName_folder[100];
 	int status;
 	
 	childid = fork();
@@ -21,25 +21,39 @@ int main(){
 
 	if (childid == 0){
 		if (fork()==0){	
-			char *argvmk[] = {"mkdir", "-p", "modul2/petshop", NULL};
-			execv("/bin/mkdir", argvmk);	
+			char *argv[] = {"mkdir", "-p", "modul2/petshop", NULL};
+			execv("/bin/mkdir", argv);	
 		}
-		
+		while ((wait(&status)) > 0){
+		char *argv[] = {"unzip", "pets.zip", "*.jpg", "-d", "modul2/petshop", NULL};
+        		execv("/bin/unzip", argv);
+		}
+	}
+	else if (childid > 0){
 		sleep (1);
 		
 		if (fork()==0){
-			printf("test\n");
 			DIR *dirType;
-          		struct dirent *dirFile;
-          		dirType = opendir("~/modul2/petshop");
-		}
-		
-	}
-	else if (childid > 0){
-		char *argv[] = {"unzip", "pets.zip", "*.jpg", "-d", "modul2/petshop", NULL};
-        		execv("/bin/unzip", argv);
-			 
+          		struct dirent *fileDir;
+          		dirType = opendir("modul2/petshop");
+          		
+          		while((fileDir = readdir(dirType)) != NULL)
+          		{
+            			printf("Folder Terbuat\n");
+            			//if ( !strcmp( fileDir-> d_name, "."  )) continue;
+            			//if ( !strcmp( fileDir-> d_name, ".." )) continue;
+				    
+				    strcpy(animalName_folder, "modul2/petshop/");
+				    strcat(animalName_folder, strtok(fileDir -> d_name, ";"));
+				    
+				    childid2 = fork();
+				    if(childid2 == 0)
+				    {
+				      char *argv[] = {"mkdir", "-p", animalName_folder, NULL};
+				      execv("/bin/mkdir", argv);
+				    }
+          		}		
+		}	 
 	}
 	return 0;
 }
-	
