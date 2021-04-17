@@ -18,8 +18,7 @@ firstchild = fork();
     }
 
     if (firstchild == 0)
-    {
-	   //Buat Folder
+    { 
 	   char *arg[] = {"mkdir",nmfolder[0],nmfolder[1],nmfolder[2],NULL};
 	   execv("/bin/mkdir",arg);
     }
