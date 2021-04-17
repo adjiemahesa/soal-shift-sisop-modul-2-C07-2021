@@ -88,8 +88,16 @@ third = fork();
 	 while((wait(&status)) > 0);}
  ```
  pada setiap file yang didownloan, melakukan fork pada parent process, membuat array argv yang didalamya berisikan ``"wget","--no-check-certificate",linkdonlot[film],"-O","Film_for_Stevany.zip",NULL`` index dalam array "linkdonlot" disesuaikan dengan file yang di-download, kemudian memanggil fungsi evecv dengan argumen ``"/usr/bin/wget",argv`` lalu melakukan wait pada proses tersebut.
+ 
+ ___hasil dari nomor 1a dan 1b___
+ ![output 1a1b](https://user-images.githubusercontent.com/81466736/115110407-7b2e8a80-9fa5-11eb-86a3-f8f8ebd0f6c8.JPG)
+
 
 __1C__
+
 __1D__
+
 __1E__
+
 __1F__
+
