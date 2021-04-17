@@ -149,7 +149,7 @@ Masih bermasalah dalam memindahkan file dan rename secara bersamaan
 
 __2D__
 
-Masih bermasalah dalam melakukan pemisahan nama dikarenakan pada 2C file bisa rename tapi file original akan berubah.
+Masih bermasalah dalam melakukan pemisahan nama
 
 __2E__
 
