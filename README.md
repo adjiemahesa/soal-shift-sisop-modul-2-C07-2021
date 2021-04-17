@@ -103,12 +103,26 @@ __1F__
 # Soal 2
 
 __2A__
-Pada soal ini kita diminta pertama-tama untuk mengextract file ``pets.zip`` yang kita masukkan kedalam folder `modul 2` dan `petshop`
+Pada soal ini kita diminta pertama-tama untuk mengextract file `pets.zip` yang kita masukkan kedalam folder `modul 2` dan `petshop`. Permasalah tersebut kita gunakan fungsi `execv` dimana akan melakukan eksekusi suatu program. Fungsi tersebut kita buatkan seperti berikut
+```
+if (fork()==0){	
+		char *argv[] = {"mkdir", "-p", "modul2/petshop", NULL};
+		execv("/bin/mkdir", argv);	
+	}
+	while ((wait(&status)) > 0){
+	char *argv[] = {"unzip", "pets.zip", "*.jpg", "-d", "modul2/petshop", NULL}; 
+	execv("/bin/unzip", argv);
+}
+```
+Kita menggunakan `fork` dan `wait` untuk melakukan pengerjaan `exec` agar bisa berjalan bersamaan dan tereksekusi semua secara bergantian. Untuk menggunakan fungsi wait kita gunakan `while ((wait(&status)) > 0)` dimana jika nilai dari **int** `status` bernilai benar maka akan jalan. 
 
 __2B__
+Pada soal ini saya gunakan directory
 
 __2C__
+Saya masih bermasalah dalam memindahkan file dan rename secara bersamaan
 
 __2D__
+Saya masih bermasalah dalam melakukan pemisahan nama dikarenakan pada 2C saya bisa rename tapi file akan berubah.
 
 __2E__
