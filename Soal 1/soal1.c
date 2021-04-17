@@ -7,7 +7,7 @@
 
 int main()
 {
-    pid_t firstchild, secondchild, thirdchild, fourthchild, fifthchild, sixthchild;
+    pid_t first second, third, fourth, fifth, sixth;
     
 
     int status;
@@ -17,30 +17,30 @@ int main()
     int musik = 1;
     int film = 2;
 
-    firstchild = fork();
+    first = fork();
     
-    if (firstchild < 0){
+    if (first < 0){
         exit(EXIT_FAILURE);
     }
 
-    if (firstchild == 0)
+    if (first == 0)
     {
 	   //Buat Folder
 	   char *arg[] = {"mkdir",nmfolder[0],nmfolder[1],nmfolder[2],NULL};
 	   execv("/bin/mkdir",arg);
     }
     else{
-    secondchild = fork();
-	    if(secondchild < 0){
+    second = fork();
+	    if(second < 0){
 	    exit(EXIT_FAILURE);
 	    }
 
-     if(secondchild == 0) {
-        thirdchild = fork();
-	    if(thirdchild <= -1) {
+     if(second == 0) {
+        third = fork();
+	    if(third <= -1) {
 	        exit(EXIT_FAILURE);
 	   }
-    if (thirdchild == 0){
+    if (third== 0){
 		//1B(foto)
     char *argv[] = {"wget","--no-check-certificate",linkdonlot[foto],"-O","Foto_for_Stevany.zip",NULL};
     execv("/usr/bin/wget",argv);
@@ -48,18 +48,18 @@ int main()
 
      else{
 	   while((wait(&status)) > 0);
-            fourthchild = fork();
-	   if(fourthchild <= -1){
+            fourth = fork();
+	   if(fourt <= -1){
 	        exit(EXIT_FAILURE);
 	    }
       
-     if(fourthchild == 0){
-        fifthchild = fork();
+     if(fourth == 0){
+        fifth = fork();
 		 
-       if(fifthchild <= -1){
+       if(fifth<= -1){
 		    exit(EXIT_FAILURE);
 		    }
-        if(fifthchild == 0){
+        if(fifth == 0){
 		    //1B(musik)
          char *argv[] = {"wget","--no-check-certificate",linkdonlot[musik],"-O","Musik_for_Stevany.zip",NULL};
          execv("/usr/bin/wget",argv);
@@ -71,10 +71,10 @@ int main()
 		   while((wait(&status)) == 0);
               sixthchild = fork();
 		
-        if(sixthchild <= -1){
+        if(sixth <= -1){
 		    exit(EXIT_FAILURE);
 		    }
-        if(sixthchild == 0){
+        if(sixth == 0){
 		    //1B(film)
          char *argv[] = {"wget","--no-check-certificate",linkdonlot[film],"-O","Film_for_Stevany.zip",NULL};
          execv("/usr/bin/wget",argv);
