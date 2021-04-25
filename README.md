@@ -228,7 +228,9 @@ if (fork()==0){
 	execv("/bin/unzip", argv);
 }
 ```
-Kita menggunakan `fork` dan `wait` untuk melakukan pengerjaan `exec` agar bisa berjalan dan tereksekusi semua secara tidak berbentrokan. Untuk menggunakan fungsi wait kita gunakan `while ((wait(&status)) > 0)` dimana jika nilai dari **int** `status` bernilai benar maka akan jalan. 
+Kita menggunakan `fork` dan `wait` untuk melakukan pengerjaan `exec` agar bisa berjalan dan tereksekusi semua secara tidak berbentrokan. Untuk menggunakan fungsi wait kita gunakan `while ((wait(&status)) > 0)` dimana jika nilai dari **int** `status` bernilai benar maka akan jalan.
+![Screenshot 2021-04-25 214222](https://user-images.githubusercontent.com/55140514/115998009-7e61f000-a60f-11eb-9c33-513d5b9af3f3.jpg)
+![Screenshot 2021-04-25 214241](https://user-images.githubusercontent.com/55140514/115998012-81f57700-a60f-11eb-9530-640afc30940c.jpg)
 
 __2B__
 
@@ -255,6 +257,7 @@ childid2 = fork();
 				      execv("/bin/mkdir", argv);
 				    }
 ```
+![Screenshot 2021-04-25 214257](https://user-images.githubusercontent.com/55140514/115998001-75711e80-a60f-11eb-8cce-98864c7f1ae1.jpg)
 
 __2C__
 Pada soal ini kami diminta untuk bisa gambar-gambar yang telah terekstrak kedalam folder masing-masing jenis hewan yang telah terbuat pada soal 2B sekaligus melakukan rename pada gambar sesuai dengan nama yang dimiliki hewan tersebut. Dalam pengerjaan soal ini kami melakukan pembagian kategori gambar untuk gambar dengan satu atau dua hewan yang diperlukan oleh soal 2D. Hal itu kami lakukan dengan melakukan pengecheckan apakah string memiliki char ``"_"`` atau tidak. Maka dalam pengerjaan soal ini kita menyelesaikan soal 2D terlebih dahulu baru melakukan selainnya.
@@ -307,11 +310,10 @@ Untuk yang tipe dua hewan kita menggunakan ``idAnimal`` yang menggunakan identit
 ```
 Setelah itu, kami menggunakan ``nameFile`` untuk rename seperti pada tipe satu hewan
 ```
-strcpy(nameFile, "modul2/petshop/");
-                        strcat(nameFile, idAnimal[0]);
-                        strcat(nameFile, "/");
-                        strcat(nameFile, idAnimal[1]);
-                        strcat(nameFile, ".jpg");
+		strcpy(nameFile, animalName_folder);
+                    strcat(nameFile, "/");
+                    strcat(nameFile, idAnimal[1]);
+                    strcat(nameFile, ".jpg");
 ```
 Dan terakhir baru kita pindahkan dan gantikan namanya menggunakan variable tersebut dan fungsi string.
 ```
@@ -325,11 +327,94 @@ if (childid3 = fork() == 0)
                             execv("/bin/mv", Args);
                         }
 ```
-
+![Screenshot 2021-04-25 214313](https://user-images.githubusercontent.com/55140514/115998027-8cb00c00-a60f-11eb-9dde-605408c572d9.jpg)
 
 __2D__
+Pada soal ini untuk memisahkan antara gambar yang ada satu dan dua atau lebih hewan kita observasi bahwa yang dua hewan mempunyai penamaan dengan character ``"_"`` sehingga kita menggunakan fungsi strchr untuk mencari character tersebut. `` if (strchr(dirFile->d_name, '_'))``. Lalu kita memisahkan identitas hewan menggunakan variable temp2.
+```
+		strcat(dirFile->d_name, "_");
+                    char *temp2 = strtok(dirFile->d_name, "_");
+```
+Lalu, kita lakukan loopingan untuk mengambil identitas hewan yang break kalau ketemu char ";" dan mengambil data selanjutnya. Ada tiga buah identitas hewan, yaitu :
 
-Masih bermasalah dalam melakukan pemisahan nama
+-idAnimal[0] tipe hewan
+-idAnimal[1] nama hewan
+-idAnimal[2] umur hewan
+```
+while(temp2 != NULL)
+                    {
+                        sleep(1);
+
+                        strcpy(twoAnimal, temp2);
+                        int idx = 0;
+                        int x;
+
+                        sleep(1);
+
+                        x = 0;
+                        while(twoAnimal[idx]!=';') {
+                            idAnimal[0][x] = twoAnimal[idx];
+                            idx++;
+                            x++;
+                        }
+                        idAnimal[0][x] = '\0';
+
+                        sleep(1);
+
+                        idx++;
+                        x = 0;
+                        while(twoAnimal[idx]!=';') {
+                            idAnimal[1][x] = twoAnimal[idx];
+                            idx++;
+                            x++;
+                        }
+                        idAnimal[1][x] = '\0';
+
+                        sleep(1);
+
+                        idx++;
+                        x = 0;
+                        while(twoAnimal[idx]!='\0' && twoAnimal[idx]!='j'){
+                            idAnimal[2][x] = twoAnimal[idx];
+                            idx++;
+                            x++;
+                        }
+                        idAnimal[2][x] = '\0';
+
+                        if (idAnimal[2][x-1] == '.')
+                        {
+                            idAnimal[2][x-1] = '\0';
+                        }
+```
+Lalu kita amibilkan variable fileDir2 untuk menjadi directory gambar setelah di esktrak.
+```
+strcpy(fileDir2, "modul2/petshop/");
+                        strcat(fileDir2, temp2);
+```
+Lalu, kita periksa jika string tersebut ada ".jpg" yang bisa terjadi jika membagi 2 bagian nama file.
+```
+if(!strstr(temp2, ".jpg"))
+                        {
+                            strcat(fileDir2, ".jpg"); 
+                        }
+```
+Setelah itu, kami copy file tersebut untuk tiap hewan yang dicopy dengan nama masing-masing hewan yang ada
+```
+if (childid3 = fork() == 0)
+                        {
+                            char *Args[] = {"cp", fileDirect, fileDir2, NULL};
+                            execv("/bin/cp", Args);
+                        }
+```
+Lalu, kita berikan variable untuk renaming file dengan nama nameFile
+```
+strcpy(nameFile, animalName_folder);
+                    strcat(nameFile, "/");
+                    strcat(nameFile, idAnimal[1]);
+                    strcat(nameFile, ".jpg");
+```
+Selanjutnya kita buat sehingga variable animalName_folder menjadi directory dari file yang sudah dipindahkan
+```
 
 __2E__
 
