@@ -44,9 +44,9 @@ int main() {
     int foto = 0;
     int musik = 1;
     int film = 2;
-    int test = 1;
-   // if(waktu->tm_mon == 3 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && waktu->tm_min == 22 && waktu->tm_sec == 0 )
-if (test == 1)
+    //int test = 1;
+   if(waktu->tm_mon == 3 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && waktu->tm_min == 22 && waktu->tm_sec == 0 )
+//if (test == 1)
     {
         pid_t first,second,third,fourth,fifth,sixth,seventh,eighth,ninth,th10,th11,th12;
         
@@ -155,10 +155,10 @@ if (test == 1)
                     
                 }
             }
-        } test ++;  
+        } //test ++;  
     }
-   // else if (waktu->tm_mon == 3 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && waktu->tm_min == 22 && waktu->tm_sec == 0)
-if (test > 1)
+   else if (waktu->tm_mon == 3 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && waktu->tm_min == 22 && waktu->tm_sec == 0)
+//if (test > 1)
     {
     pid_t th13;
         th13 = fork();
