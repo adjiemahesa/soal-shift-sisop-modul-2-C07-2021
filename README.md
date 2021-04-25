@@ -413,12 +413,39 @@ strcpy(nameFile, animalName_folder);
                     strcat(nameFile, idAnimal[1]);
                     strcat(nameFile, ".jpg");
 ```
-Selanjutnya kita buat sehingga variable animalName_folder menjadi directory dari file yang sudah dipindahkan
+Selanjutnya kita buat sehingga variable animalName_folder menjadi directory dari file yang sudah dipindahkan seperti pada 2C dan merename file dengan command mv seperti pada 2C. Terakhir kita hapus kan file original dengan nama file 2 peliharaan.
 ```
+if (childid3 = fork() == 0)
+                    {
+                        char *Args[] = {"rm", fileDirect, NULL};
+                        execv("/bin/rm", Args);
+                    }
+```
+![Screenshot 2021-04-25 214313](https://user-images.githubusercontent.com/55140514/115998839-64c2a780-a613-11eb-8552-ccda53e568da.jpg)
+![Screenshot 2021-04-25 221339](https://user-images.githubusercontent.com/55140514/115998859-815edf80-a613-11eb-9d88-d4a5504eb275.jpg)
 
 __2E__
-
-Masih bermasalah karena prgram tidak bisa membuat file textnya sesuai output yang diinginkan
+Pada soal ini kita diminta untuk membuat sebuah keterangan dengan nama dan umur dari hewan yang ada pada gambar. kita menggunakan pembagian untuk gambar 2 hewan dan 1 hewan. untuk 2 hewan kami menggunakan variable fileDirKet untuk membuat keterangan.txt
+```
+strcpy(fileDirKet, "modul2/petshop/");
+                        strcat(fileDirKet, idAnimal[0]);
+                        strcat(fileDirKet, "/keterangan.txt");
+```
+Lalu kita gunakan idAnimal yang mengambil identitas hewan yang telah dilaksanakan pada soal 2D. Setelah itu, kita membuat kondisi dimana menghilangkan ".jpg" jika ada
+```
+strtok(idAnimal[2], "j");
+                    idAnimal[2][strlen(idAnimal[2])-1] = '\0';
+```
+Lalu kita gunakan File Handling untuk menulis teks nama dan umur dari masing-masing idAnimal.
+```
+FILE *fKet;
+                    fKet = fopen(fileDirKet, "a");
+                    fprintf(fKet, "nama : %s\n", idAnimal[1]);
+                    fprintf(fKet, "umur : %s tahun\n\n", idAnimal[2]);
+                    fclose(fKet);
+```
+Untuk yang satu gambar cara nya sama tapi kita gunakan pengambilan identitas dengan variable temp2.
+![Screenshot 2021-04-25 214331](https://user-images.githubusercontent.com/55140514/115998742-e9f98c80-a612-11eb-8207-f4c9964735c0.jpg)
 
 # Soal 3
 
