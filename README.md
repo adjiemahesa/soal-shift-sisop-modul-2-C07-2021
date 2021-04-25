@@ -235,7 +235,7 @@ int main(int argc, char** argv) {
                 time_t waktubaru = time(0) ;
                 struct tm new_tstruct = *localtime(&waktubaru) ;
                 char new_ans[85] ;
-                strftime(new_ans, sizeof(new_buff), "%Y-%m-%d_%X", &new_tstruct) ; // membuat struct untuk tahun date
+                strftime(new_ans, sizeof(new_ans), "%Y-%m-%d_%X", &new_tstruct) ; // membuat struct untuk tahun date
                 
                 strcpy(hit, ans) ;
                 strcat(hit, "/") ;
@@ -288,7 +288,139 @@ int main(int argc, char** argv) {
         }
     }
 }
+
 ```
+Penjelasan Source Code :
 <br>
-Pada Soal ini 
+__3A__
+```
+pid_t child_id =fork(); // mem fork
+ 
+        char hit[105] ;
+        char ans[105] ;
+
+        time_t timesekarang = time(0) ;  
+        struct tm t = *localtime(&timesekarang) ;
+        strftime(ans, sizeof(ans), "%Y-%m-%d_%X", &t) ; // mendeklarasikan time, kemudian di masukkan ke variable hit dan ans 
+```
+
+Pada poin mini merupakan perintah untuk melakukan fork dan mendeklarasikan time,kemudian di masukkan ke variable hit dan ans.
+<br>
+Selanjutnya
+```
+if (child_id < 0) {
+            exit(EXIT_FAILURE) ;
+        }
+
+        if (child_id == 0) {
+            if (fork() == 0) {
+                char* arg[] = {"mkdir", "-p", ans, NULL} ;
+                execv("/bin/mkdir", arg) ; // untuk menjalankan execv untuk membuat direktori/folder
+            }
+        }
+```
+Fungsi di atas di gunakan untuk menjalankan execv membuat direktori folder.<br><br>
+__3B__
+<br>
+Untuk 3B sendiri kita di minta untuk melakukan download dari `piscum.photos` kemudian kita di suruh memasukan ke direkrori yang telah kita buat.
+```
+char link[55] = "https://picsum.photos/" ; 
+                int sizefoto = (((long)mktime(&t)) % 1000) + 50 ; // ukuran foto
+                char size[15] ;
+                sprintf(size, "%d",sizefoto) ;
+                strcat(link, size) ; // menyimpan size foto di link
+		 
+		char* arg[] = {"wget", "-q", "-O", hit, link, NULL} ;
+                execv("/bin/wget", arg) ; // menjalankan proses execv
+```
+fungsi ini memerintahkan kita untuk menyimpan size foto(ukuran foto). kemudian di `execv` .
+<br><br>
+__3C__
+<br>
+Pada soal ini kita di minta melakukan status dowload ketika dowonload selesai dan terdapat enskripsi string yang telah di tentukan.
+```
+ char depth[50], hint[55] = "Download Success" ; // hint sendiri merupakan status
+            strcpy(depth, ans) ;
+            strcat(depth, "/") ;
+            strcat(depth, "status.txt") ;
+            FILE* txt = fopen(depth, "w") ;
+            
+            if(txt == NULL){
+                exit(EXIT_FAILURE);
+            }
+```
+Pada fungsi ini merupakan untuk menunjukkan status download berhasil yang nantinya akan berbentuk `.txt`.
+<br> Selanjutnya <br>
+```
+ for (int i = 0 ; i < strlen(hint) ; i++) {
+                if ((hint[i] >= 'a' && hint[i] <= 'z') ||
+                    (hint[i] >= 'A' && hint[i] <= 'Z'))
+                {
+                    hint[i] += 5;
+
+                    if ((hint[i] > 'z') || (hint[i] > 'Z' && hint[i] < 'a'))
+                    {
+                        hint[i] -= 26;
+                    }
+                }
+            }
+            fputs(hint,txt);
+            fclose(txt) ;
+       
+            strcpy(depth, ans) ;
+            strcat(depth, ".zip") ;
+            char* argz[] = {"zip", depth, "-q", "-m", "-r", ans, NULL} ;
+            execv("/bin/zip", argz) ;
+        }
+```
+fungsi di atas merupakan bagian enkripsi yang sudah di tentukan yang nanti kan berbentuk `.zip`
+<br><br>
+__3D__
+<br>
+Pada soal ini kita di minta utuk melakukan fungsi killer.sh yang dimana akan men terminasi atau menghentikan semua program yang jalan.
+```
+void pkiller(char a[]) {
+    FILE* src = fopen("killer.sh", "w") ;
+    fputs(a, src) ;
+    fclose(src) ;
+}
+```
+<br><br>
+__3E__
+Pada soal ini kita diminta membuat program dengan dua kondisi ketika `-x` dan juga ketika `-z` .
+```
+void sig() {
+    int run = 0 ;
+}
+
+void pkiller(char a[]) {
+    FILE* src = fopen("killer.sh", "w") ;
+    fputs(a, src) ;
+    fclose(src) ;
+}
+
+int main(int argc, char** argv) {
+    if (argc == 2) {
+        char a[85] ;
+        if (!strcmp(argv[1], "-z")) // kondisi -z
+	{
+            strcpy(a, "#!/bin/bash\nkillall -9 ./soal3\nrm $0\n") ;
+            pkiller(a) ;
+        }
+        else if (!strcmp(argv[1], "-x")) kondisi -x 
+	{
+            strcpy(a, "#!/bin/bash\nkillall -15 ./soal3\nrm $0\n") ;
+            pkiller(a) ;
+            signal(SIGTERM, sig) ;
+        }
+        else {
+            return 0 ;
+        }
+    }
+    else {
+        return 0 ;
+    }
+```
+berikut merupakan program dengan 2 kondisi yang berbeda
+
 			    
