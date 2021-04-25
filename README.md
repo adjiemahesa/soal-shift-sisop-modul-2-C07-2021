@@ -236,15 +236,15 @@ Pada soal ini kami dimintakan untuk membuat folder untuk tiap jenis hewan yang t
 ```
 if (fork()==0){
 			DIR *directoryType;
-          		struct dirent *fileDir;
+          		struct dirent *dirFile;
           		directoryType = opendir("modul2/petshop");
-			while((fileDir = readdir(directoryType)) != NULL){
+			while((dirFile = readdir(directoryType)) != NULL){
 ```
 Lalu, untuk mengambil nama dari tiap foto untuk kita buatkan folder kita menggunakan fungsi `string` dengan `strcpy` dan `strcat` dimana akan mengabil dari folder `modul2/petshop` dan string hingga symbol `;` dengan menggunakan `strtok`
 ```
 printf("Folder Terbuat\n");    
 				    strcpy(animalName_folder, "modul2/petshop/");
-				    strcat(animalName_folder, strtok(fileDir -> d_name, ";"));
+				    strcat(animalName_folder, strtok(dirFile -> d_name, ";"));
 ```
 Setelah itu, untuk membuat foldernya kita menggunakan `childid2` yang kita gunakan sebagai `fork` dari pengeksekusian program dan menggunakan `execv` dengan argumen ` char *argv[] = {"mkdir", "-p", animalName_folder, NULL};` agar terbuat folder beserta nama yang dingingkan.
 ```
@@ -257,8 +257,75 @@ childid2 = fork();
 ```
 
 __2C__
+Pada soal ini kami diminta untuk bisa gambar-gambar yang telah terekstrak kedalam folder masing-masing jenis hewan yang telah terbuat pada soal 2B sekaligus melakukan rename pada gambar sesuai dengan nama yang dimiliki hewan tersebut. Dalam pengerjaan soal ini kami melakukan pembagian kategori gambar untuk gambar dengan satu atau dua hewan yang diperlukan oleh soal 2D. Hal itu kami lakukan dengan melakukan pengecheckan apakah string memiliki char ``"_"`` atau tidak. Maka dalam pengerjaan soal ini kita menyelesaikan soal 2D terlebih dahulu baru melakukan selainnya.
 
-Masih bermasalah dalam memindahkan file dan rename secara bersamaan
+Setelah itu, karena akan ada dua buah tipe gambar yang ingin di proses, maka pengerjaan soal 2C akan ada didalam kedua tipe proses. Untuk memindahkan file tersebut kita menggunakan ``mv`` dengan variable dirFile dan animalName_folder.
+```
+if (childid3 = fork() == 0)
+                    {
+                        char *Args[] = {"mv", fileDirect, animalName_folder, NULL};
+                        execv("/bin/mv", Args);
+                    }
+```
+Lalu, untuk rename kita menggunakan variable nameFile dengan menggunakan fungsi ``strcpy`` dan ``strcat``
+```
+strcpy(nameFile, animalName_folder);
+                    strcat(nameFile, "/");
+                    strcat(nameFile, idAnimal[1]);
+                    strcat(nameFile, ".jpg");
+```
+Setelah itu kita variable animalName_folder kita rubah menjadi directory untuk gambar-gambar
+```
+strcat(animalName_folder, "/");
+                    strcat(animalName_folder, dirFile->d_name);
+```
+Baru bisa kita rubah kan nama gambar dengan variable nameFile dan bantuan ``mv``
+```
+if (childid3 = fork() == 0)
+                    {
+                        char *Args[] = {"mv", animalName_folder, nameFile, NULL};
+                        execv("/bin/mv", Args);
+                    }
+```
+Untuk yang tipe dua hewan kita menggunakan ``idAnimal`` yang menggunakan identitas hewan dengan menggunakan looping yang akan break jika bertemu char ``;``. Kita berasumsi sudah diambil identitas tersebut. Lalu, kita menggunakan variable ``fileDir2`` untuk mengarahkan ke lokasi gambar yang sudah di ekstrak. Lalu file di copy terlebih dahulu.
+```
+ strcpy(fileDir2, "modul2/petshop/");
+                        strcat(fileDir2, temp2);
+
+                        if(!strstr(temp2, ".jpg"))
+                        {
+                            strcat(fileDir2, ".jpg"); 
+                        }
+                       
+		       sleep(1);
+
+                        if (childid3 = fork() == 0)
+                        {
+                            char *Args[] = {"cp", fileDirect, fileDir2, NULL};
+                            execv("/bin/cp", Args);
+                        }
+```
+Setelah itu, kami menggunakan ``nameFile`` untuk rename seperti pada tipe satu hewan
+```
+strcpy(nameFile, "modul2/petshop/");
+                        strcat(nameFile, idAnimal[0]);
+                        strcat(nameFile, "/");
+                        strcat(nameFile, idAnimal[1]);
+                        strcat(nameFile, ".jpg");
+```
+Dan terakhir baru kita pindahkan dan gantikan namanya menggunakan variable tersebut dan fungsi string.
+```
+if (childid3 = fork() == 0)
+                        {
+                            strcpy(animalName_folder,"modul2/petshop/");
+                            strcpy(temp, temp2);
+                            strcat(animalName_folder, strtok(temp, ";"));
+
+                            char *Args[] = {"mv", fileDir2, nameFile, NULL};
+                            execv("/bin/mv", Args);
+                        }
+```
+
 
 __2D__
 
