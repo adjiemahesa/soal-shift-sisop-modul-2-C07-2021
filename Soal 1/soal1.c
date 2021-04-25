@@ -16,8 +16,7 @@ int main() {
  
   pid = fork();   
  
-  /* Keluar saat fork gagal
-  * (nilai variabel pid < 0) */
+ 
   if (pid < 0) {
     exit(EXIT_FAILURE);
   }
