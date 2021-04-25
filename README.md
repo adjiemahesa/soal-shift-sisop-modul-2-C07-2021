@@ -92,13 +92,119 @@ third = fork();
  ![output 1a1b](https://user-images.githubusercontent.com/81466736/115110407-7b2e8a80-9fa5-11eb-86a3-f8f8ebd0f6c8.JPG)
 
 
-__1C__
+__1C dan 1D__
+di soal ini kami diminta untuk meng-extract file yang sudah didownload dan memindahkan filenya kedalam folder yang sudah dibuat
 
-__1D__
+```
+while((wait(&status)) > 0);  //untuk foto
+                    char *argv[] = {"unzip","-j","Foto_for_Stevany.zip","*.jpg","-d","./Pyoto",NULL};
+                    execv("/usr/bin/unzip",argv);
+```
+```
+while((wait(&status)) > 0);  //untuk musik
+                    char *argv[] = {"unzip","-j","Musik_for_Stevany.zip","-d","./Musyik",NULL};
+                        execv("/usr/bin/unzip",argv);
+```
+```
+while((wait(&status)) > 0);  //untuk film
+                   char *argv[] = {"unzip","-j","Film_for_Stevany.zip","-d","./Fylm",NULL};
+                            execv("/usr/bin/unzip",argv);   
+			    
+```
+pada bagian ini program akan meng-extract setelah melakukan ```wait``` saat file didownload di setiap prosenya, maka setiap kali program menlakukan download akan melakukan wait hingga satu zip ter-download lalu file zip tersebut akan di-unzip dan memindahkannya kedalam folder yang telah dibuat, kemudian akan melanjutkan ke download selanjutnya
 
 __1E__
+pada soal ini kami diminta untuk menjalankan program secara otomatis pada waktu yang telah ditentukan kemudian men-zip folder-folder yang telah dibuat
+```
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <unistd.h>
+#include <syslog.h>
+#include <string.h>
+
+int main() {
+     pid_t pid, sid;        // Variabel untuk menyimpan PID
+
+     pid = fork();     // Menyimpan PID dari Child Process
+
+     /* Keluar saat fork gagal
+     * (nilai variabel pid < 0) */
+     if (pid < 0) {
+          exit(EXIT_FAILURE);
+     }
+
+     /* Keluar saat fork berhasil
+     * (nilai variabel pid adalah PID dari child process) */
+     if (pid > 0) {
+          exit(EXIT_SUCCESS);
+     }
+
+     umask(0);
+
+     sid = setsid();
+     if (sid < 0) {
+          exit(EXIT_FAILURE);
+     }
+
+     if ((chdir("/")) < 0) {
+          exit(EXIT_FAILURE);
+     }
+
+     close(STDIN_FILENO);
+     close(STDOUT_FILENO);
+     close(STDERR_FILENO);
+
+     while (1) {
+          // Tulis program kalian di sini
+
+          sleep(30);
+    }
+}
+```
+bagian diatas adalah template Daemon dari modul 2 agar program bisa berjalan di background. Kemudian dengan menggunakan library ``<time.h>`` maka kita dapat mengatur jadwal untuk menjalankan program
+
+```
+ while (1) {
+    time_t jadwal = time(NULL);
+    struct tm *waktu = localtime(&jadwal);
+    if(waktu->tm_mon == 4 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && waktu->tm_min == 22 && waktu->tm_sec == 0 )
+
+    {
+```
+
 
 __1F__
+
+pada soal ini kami diminta untuk semua folder di zip dengan nama Lopyu_Stevany.zip dan semua folder akan di delete(sehingga hanya menyisakan .zip).
+```
+else if (waktu->tm_mon == 3 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && waktu->tm_min == 22 && waktu->tm_sec == 0)
+//if (test > 1)
+    {
+    pid_t th13;
+        th13 = fork();
+        if(th13 < 0)
+        {
+            exit(EXIT_FAILURE);
+        }
+        if(th13 == 0)
+        {
+            char *argv[] = {"zip", "-qrm", "Lopyu_Stevany.zip", "Pyoto", "Musyik", "Fylm", NULL};
+            execv("/usr/bin/zip", argv);
+        }
+        else
+        {
+            while((wait(&status)) > 0);
+            char *argv[] = {"rm", "-r", "FOTO", "MUSIK", "FILM", NULL};
+            execv("/bin/rm",argv);
+        }
+    }
+```
+
+pada agian di atas saat waktu sudah sesuai dengan jadwal yang telah ditentukan pada kondisi ``if`` maka program akan melakukan zip folder-folder yang telah ditentukan, kemudian akan menghapus folder sisanya yang tidak dipakai dengan perintah zip untuk men-zip dan rm untuk menghapus.
 
 # Soal 2
 
