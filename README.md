@@ -205,11 +205,13 @@ else if (waktu->tm_mon == 3 && waktu->tm_mday == 9 && waktu->tm_hour == 16 && wa
 ```
 
 pada agian di atas saat waktu sudah sesuai dengan jadwal yang telah ditentukan pada kondisi ``if`` maka program akan melakukan zip folder-folder yang telah ditentukan, kemudian akan menghapus folder sisanya yang tidak dipakai dengan perintah zip untuk men-zip dan rm untuk menghapus.
+
 ___output___
 ![gg](https://user-images.githubusercontent.com/81466736/115995483-a2203880-a605-11eb-8a74-8d4a3193c549.JPG)
 
 __KENDALA__
-	kendala saat mengerjakan soal, file foto yang tersedia di link tidak dapat didonload dan mengeluarkan pernyataan ``error 403 forbidden`` sehingga saat melakukan download file foto program hanya menuis file text dengan nama file ``Foto_for_Stevany.zip``
+
+kendala saat mengerjakan soal, file foto yang tersedia di link tidak dapat didonload dan mengeluarkan pernyataan ``error 403 forbidden`` sehingga saat melakukan download file foto program hanya menuis file text dengan nama file ``Foto_for_Stevany.zip``
 	
 # Soal 2
 
