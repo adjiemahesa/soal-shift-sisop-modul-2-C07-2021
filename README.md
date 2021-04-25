@@ -249,6 +249,12 @@ childid2 = fork();
 				    }
 ```
 
+___output___
+![gg](https://user-images.githubusercontent.com/81466736/115995483-a2203880-a605-11eb-8a74-8d4a3193c549.JPG)
+
+__KENDALA__
+	kendala saat mengerjakan soal, file foto yang tersedia di link tidak dapat didonload dan mengeluarkan pernyataan ``error 403 forbidden`` sehingga saat melakukan download file foto program hanya menuis file text dengan nama file ``Foto_for_Stevany.zip``
+
 __2C__
 
 Masih bermasalah dalam memindahkan file dan rename secara bersamaan
