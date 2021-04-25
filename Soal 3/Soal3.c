@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
                 time_t waktubaru = time(0) ;
                 struct tm new_tstruct = *localtime(&waktubaru) ;
                 char new_ans[85] ;
-                strftime(new_ans, sizeof(new_buff), "%Y-%m-%d_%X", &new_tstruct) ; // membuat struct untuk tahun date
+                strftime(new_ans, sizeof(new_ans), "%Y-%m-%d_%X", &new_tstruct) ; // membuat struct untuk tahun date
                 
                 strcpy(hit, ans) ;
                 strcat(hit, "/") ;
